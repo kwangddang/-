@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리의 오키나와 🌊</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--sand:#F5F0E8;--ocean:#1B6B93;--deep:#0A3D62;--coral:#E8846B;
+--foam:#E8F4F8;--sun:#F4A261;--palm:#2A7F62;--shell:#FDF2E9;
+--night:#0C1B2A;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--sand);color:var(--night);overflow-x:hidden}
+
+.hero{
+min-height:100vh;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;
+background:linear-gradient(180deg,#87CEEB 0%,#4DB8D5 30%,var(--ocean) 60%,#1a5276 100%);
+position:relative;overflow:hidden;padding:2rem;
+}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:var(--sand);border-radius:50% 50% 0 0 / 100% 100% 0 0}
+.hero-sub{font-family:'Caveat',cursive;font-size:1.3rem;color:rgba(255,255,255,.8);margin-bottom:.5rem;letter-spacing:2px;animation:fadeDown .8s ease both}
+.hero h1{font-family:'Caveat',cursive;font-size:clamp(3rem,8vw,5.5rem);color:#fff;font-weight:600;line-height:1.2;margin-bottom:1rem;animation:fadeDown 1s ease both;animation-delay:.2s;text-shadow:0 2px 20px rgba(0,0,0,.15)}
+.hero-date{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:rgba(255,255,255,.7);letter-spacing:3px;animation:fadeDown 1s ease both;animation-delay:.5s;background:rgba(255,255,255,.1);padding:8px 20px;border-radius:30px;backdrop-filter:blur(10px)}
+.hero-scroll{position:absolute;bottom:140px;animation:fadeDown 1s ease both, bob 2s ease-in-out infinite;animation-delay:.8s;color:rgba(255,255,255,.6);font-size:.8rem;letter-spacing:2px}
+.hero-scroll::after{content:'↓';display:block;text-align:center;margin-top:4px;font-size:1.2rem}
+
+.terminal{max-width:560px;margin:-40px auto 3rem;position:relative;z-index:2;background:var(--night);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.terminal-bar{height:36px;background:#1a2332;display:flex;align-items:center;padding:0 14px;gap:8px}
+.terminal-dot{width:12px;height:12px;border-radius:50%}
+.terminal-dot:nth-child(1){background:#FF6058}
+.terminal-dot:nth-child(2){background:#FFBE2E}
+.terminal-dot:nth-child(3){background:#27CA40}
+.terminal-body{padding:20px 24px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:2;color:#a8d8b9}
+.comment{color:#546e7a}.keyword{color:#82AAFF}.string{color:#C3E88D}.func{color:#F4A261}.var{color:#E8846B}
+
+.content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
+
+.day{margin-bottom:4rem}
+.day-header{display:flex;align-items:center;gap:16px;margin-bottom:2rem}
+.day-num{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Caveat',cursive;font-size:1.8rem;font-weight:600;color:#fff}
+.day-colors-0{background:linear-gradient(135deg,var(--coral),var(--sun))}
+.day-colors-1{background:linear-gradient(135deg,var(--ocean),#2E86AB)}
+.day-colors-2{background:linear-gradient(135deg,var(--palm),#45B08C)}
+.day-colors-3{background:linear-gradient(135deg,#8E7CC3,#C27BA0)}
+.day-title{font-size:1.4rem;font-weight:700;line-height:1.3}
+.day-subtitle{font-size:.85rem;color:#888;margin-top:2px;font-weight:300}
+
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--ocean) 0%,var(--coral) 100%);border-radius:2px;opacity:.2}
+.tl-item{display:flex;gap:16px;margin-bottom:16px;position:relative;padding:12px 16px;border-radius:12px;transition:all .2s}
+.tl-item:hover{background:rgba(27,107,147,.04)}
+.tl-item::before{content:'';position:absolute;left:-24px;top:18px;width:10px;height:10px;border-radius:50%;border:2px solid var(--ocean);background:var(--sand)}
+.tl-item.highlight::before{background:var(--coral);border-color:var(--coral)}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ocean);min-width:48px;padding-top:2px;font-weight:400}
+.tl-place{font-weight:500;font-size:.95rem;margin-bottom:3px}
+.tl-note{font-size:.8rem;color:#777;line-height:1.6;font-weight:300}
+.tl-tag{display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:20px;margin-top:4px;font-weight:500}
+.tag-food{background:#FFF3E0;color:#E65100}
+.tag-view{background:#E0F2F1;color:#00695C}
+.tag-shop{background:#F3E5F5;color:#7B1FA2}
+.tag-beach{background:#E0F7FA;color:#00838F}
+.parking{background:var(--foam);border-radius:10px;padding:10px 14px;margin-top:6px;font-size:.75rem;color:#555;border-left:3px solid var(--ocean)}
+.parking::before{content:'P ';font-weight:700;color:var(--ocean)}
+.divider{text-align:center;margin:3rem 0;color:#ccc;font-size:1.5rem;letter-spacing:12px}
+
+.footer{text-align:center;padding:4rem 2rem;background:linear-gradient(0deg,var(--deep) 0%,var(--night) 100%);color:rgba(255,255,255,.5)}
+.footer-heart{font-size:2.5rem;margin-bottom:1rem;animation:pulse 1.5s ease-in-out infinite}
+.footer-msg{font-family:'Caveat',cursive;font-size:1.5rem;color:rgba(255,255,255,.8);margin-bottom:.5rem}
+.footer-sub{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.3)}
+
+/* EDIT MODE */
+.fab{
+position:fixed;bottom:24px;right:24px;z-index:100;
+width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+background:var(--ocean);color:#fff;font-size:1.3rem;
+box-shadow:0 4px 20px rgba(27,107,147,.4);transition:all .2s;
+display:flex;align-items:center;justify-content:center;
+}
+.fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(27,107,147,.5)}
+.fab.active{background:var(--coral)}
+.fab-share{
+position:fixed;bottom:24px;right:90px;z-index:100;
+width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+background:var(--palm);color:#fff;font-size:1.1rem;
+box-shadow:0 4px 16px rgba(42,127,98,.4);transition:all .3s;
+display:none;align-items:center;justify-content:center;
+}
+.fab-share.show{display:flex}
+.fab-share:hover{transform:scale(1.08)}
+
+.editing .tl-item{border:1.5px dashed transparent;position:relative}
+.editing .tl-item:hover{border-color:var(--ocean);background:rgba(27,107,147,.03)}
+.editing .editable{cursor:text;border-bottom:1px dashed rgba(27,107,147,.3);padding-bottom:1px;outline:none;min-width:30px;display:inline-block}
+.editing .editable:focus{border-bottom-color:var(--coral);background:rgba(232,132,107,.05)}
+
+.btn-add{
+display:none;width:100%;padding:10px;margin-top:8px;
+border:2px dashed #ccc;border-radius:10px;background:transparent;
+color:#aaa;font-size:.8rem;cursor:pointer;transition:all .2s;
+font-family:'Noto Sans KR',sans-serif;
+}
+.btn-add:hover{border-color:var(--ocean);color:var(--ocean);background:rgba(27,107,147,.03)}
+.editing .btn-add{display:block}
+
+.btn-del{
+display:none;position:absolute;top:8px;right:8px;
+width:24px;height:24px;border-radius:50%;border:none;
+background:rgba(220,53,69,.1);color:#dc3545;font-size:.8rem;
+cursor:pointer;transition:all .2s;
+align-items:center;justify-content:center;
+}
+.btn-del:hover{background:rgba(220,53,69,.2)}
+.editing .btn-del{display:flex}
+
+.toast{
+position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+background:var(--night);color:#fff;padding:12px 24px;border-radius:10px;
+font-size:.85rem;opacity:0;transition:all .3s;z-index:200;
+pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.edit-day-header .editable{cursor:text;border-bottom:1px dashed rgba(27,107,147,.3);padding-bottom:1px}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+@media(max-width:600px){
+.tl-item{padding:8px 12px}
+.day-header{gap:12px}
+.day-num{width:52px;height:52px;font-size:1.5rem}
+.terminal-body{font-size:.7rem;padding:16px}
+.fab{bottom:16px;right:16px;width:50px;height:50px;font-size:1.1rem}
+.fab-share{bottom:16px;right:76px;width:42px;height:42px;font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<p class="hero-sub">// 우리의 첫 오키나와</p>
+<h1>희원이와 광현이의,<br>오키나와 여행</h1>
+<div class="hero-date">2026 . OKINAWA . 3N4D</div>
+<div class="hero-scroll">SCROLL</div>
+</section>
+
+<div class="terminal">
+<div class="terminal-bar"><div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div></div>
+<div class="terminal-body">
+<span class="comment">// 여행 계획을 짜봤어</span><br>
+<span class="keyword">const</span> <span class="var">trip</span> = {<br>
+&nbsp;&nbsp;destination: <span class="string">"오키나와"</span>,<br>
+&nbsp;&nbsp;duration: <span class="string">"3박 4일"</span>,<br>
+&nbsp;&nbsp;transport: <span class="string">"렌터카"</span>,<br>
+&nbsp;&nbsp;style: <span class="string">"바다 + 맛집 + 아메카지"</span>,<br>
+&nbsp;&nbsp;with: <span class="string">"너 ♡"</span><br>
+};<br><br>
+<span class="func">console.log</span>(<span class="string">"같이 가자!"</span>);<br>
+<span class="comment">// ✏️ 수정하고 싶으면 오른쪽 아래 연필 버튼!</span>
+</div>
+</div>
+
+<div class="content" id="itinerary"></div>
+
+<footer class="footer">
+<div class="footer-heart">🌊</div>
+<div class="footer-msg">오키나와의 바다</div>
+<div class="footer-sub">made by 광현</div>
+</footer>
+
+<button class="fab" id="fabEdit" onclick="toggleEdit()" title="편집 모드">✏️</button>
+<button class="fab-share" id="fabShare" onclick="shareItinerary()" title="공유하기">🔗</button>
+<div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_DATA = [
+  {
+    title:"도착 & 아메리칸 빌리지",
+    subtitle:"비치프론트 타워 미하마 · 숙소 주차장 이용, 이후 전부 도보",
+    items:[
+      {time:"12:00",place:"나하 공항 도착",note:"입국 심사 · 수하물 수령 약 30분",tag:"",parking:"",hl:false},
+      {time:"12:30",place:"렌터카 픽업",note:"셔틀 → 영업소 → 서류 · 보험 · 차량 확인 (약 45분)",tag:"",parking:"",hl:false},
+      {time:"13:15",place:"출발, 국도 58번 북상",note:"차탄까지 약 40분",tag:"",parking:"",hl:false},
+      {time:"14:00",place:"숙소 체크인",note:"비치프론트 타워 미하마. 차는 숙소 주차장에.",tag:"",parking:"숙소 전용 주차장",hl:false},
+      {time:"14:20",place:"점심 식사",note:"아메리칸 빌리지 내. 타코라이스 · A&W · 스테이크",tag:"food",parking:"",hl:true},
+      {time:"15:15",place:"아라하 비치",note:"숙소 바로 앞! 해변 산책 · 소화 타임",tag:"beach",parking:"",hl:false},
+      {time:"17:00",place:"선셋 비치",note:"도보 15분. 일몰 타이밍에 맞춰 이동",tag:"view",parking:"",hl:true},
+      {time:"18:00",place:"🌅 일몰 감상",note:"하늘이 오렌지색으로 물드는 순간",tag:"",parking:"",hl:false},
+      {time:"18:30",place:"아메리칸 빌리지",note:"디포 아일랜드 쇼핑몰 · 해안 보드워크 야경",tag:"shop",parking:"",hl:false},
+      {time:"19:30",place:"저녁 식사",note:"빌리지 내 식당에서",tag:"food",parking:"",hl:true},
+      {time:"20:30",place:"블루씰 아이스크림",note:"베니이모(자색고구마) 맛 필수! 포토존도",tag:"food",parking:"",hl:false},
+      {time:"21:00",place:"아라하 비치 야간 산책",note:"숙소 앞 밤바다. 파도 소리 들으며",tag:"",parking:"",hl:false},
+      {time:"21:30",place:"바에서 마무리",note:"Earth Village Izakaya / Barragan / AMF (도보)",tag:"",parking:"",hl:true}
+    ]
+  },
+  {
+    title:"북부 원정 드라이브",
+    subtitle:"비치프론트 타워 미하마 (연박) · 하루 종일 렌터카 이동",
+    items:[
+      {time:"07:30",place:"기상 & 아침",note:"호텔 조식 or 편의점 오니기리",tag:"",parking:"",hl:false},
+      {time:"08:00",place:"출발, 북쪽으로!",note:"",tag:"",parking:"",hl:false},
+      {time:"08:40",place:"만좌모",note:"입장 100엔. 코끼리 바위 + 절벽 산책 (20~30분)",tag:"view",parking:"전용 주차장, 무료",hl:true},
+      {time:"10:20",place:"츄라우미 수족관",note:"입장 2,180엔. 고래상어 · 돌고래 쇼(무료) · 터치풀 (약 2시간)",tag:"view",parking:"북게이트 P7 입체주차장, 무료, 1000대+",hl:true},
+      {time:"12:30",place:"비세 후쿠기 가로수길",note:"수족관에서 도보 5분. 초록 터널 산책 + 카페 점심",tag:"food",parking:"주변 민가 유료 주차장 300~500엔",hl:true},
+      {time:"14:00",place:"코우리 대교 & 코우리섬",note:"에메랄드빛 바다 위 2km 다리! 전망 포인트 사진 필수",tag:"view",parking:"",hl:true},
+      {time:"14:10",place:"코우리 오션 타워",note:"입장 1,000엔. 자동 카트 · 조개 박물관 · 360도 전망",tag:"",parking:"전용 주차장, 무료 (좁으니 일찍)",hl:false},
+      {time:"15:10",place:"코우리섬 한 바퀴",note:"드라이브 15분 + 하트 록 비치 + 카페 음료",tag:"beach",parking:"",hl:false},
+      {time:"16:10",place:"세소코 비치",note:"투명한 바다에 발 담그며 휴식",tag:"beach",parking:"전용 주차장 1,000엔 (1일)",hl:false},
+      {time:"17:00",place:"복귀 시작",note:"차탄까지 약 1시간 20분",tag:"",parking:"",hl:false},
+      {time:"18:20",place:"숙소 도착",note:"샤워 · 휴식",tag:"",parking:"",hl:false},
+      {time:"19:30",place:"저녁 식사",note:"차탄 주변, 어제와 다른 장르로",tag:"food",parking:"",hl:true},
+      {time:"20:30",place:"아라하 비치 야간 산책 & 바",note:"여유 있으면 도보로 빌리지 쪽 바",tag:"",parking:"",hl:false}
+    ]
+  },
+  {
+    title:"아울렛 → 나하 쇼핑 데이",
+    subtitle:"나하 시내 숙소 · 아시비나 & 슈리성까지 차 → 숙소 주차 후 도보",
+    items:[
+      {time:"10:00",place:"체크아웃 → 아시비나 출발",note:"차탄에서 약 30분 남하",tag:"",parking:"",hl:false},
+      {time:"10:30",place:"아시비나 아울렛몰",note:"BEAMS 아울렛 등 셀렉트샵 쇼핑 (1시간)",tag:"shop",parking:"대형 무료 주차장",hl:true},
+      {time:"11:30",place:"슈리성으로 이동",note:"아시비나에서 약 25분",tag:"",parking:"",hl:false},
+      {time:"12:00",place:"슈리성",note:"성곽 산책 무료 / 유료 400엔. 나하 시내 전망 (1시간)",tag:"view",parking:"현영 주차장 P1/P2, 320엔",hl:true},
+      {time:"13:00",place:"나하 숙소 체크인",note:"짐 내리고 차 주차. 여기서부터 전부 도보!",tag:"",parking:"숙소 주차장 or 코인파킹 (12h 최대 700~1,000엔)",hl:false},
+      {time:"13:30",place:"나미노우에 신사",note:"절벽 위 신사 + 아래 작은 해변 (30분)",tag:"view",parking:"",hl:false},
+      {time:"14:00",place:"마키시 공설시장 점심",note:"1층 해산물 골라서 2층에서 조리! 조리비 1인 500엔",tag:"food",parking:"",hl:true},
+      {time:"15:00",place:"츠보야 도자기 거리",note:"마키시에서 도보 5분. 시사 기념품 · 도자기 가게",tag:"shop",parking:"",hl:false},
+      {time:"15:30",place:"코쿠사이도리 & 우키시마도리",note:"기념품 · BEAMS + 아메카지 고착야 (FISH BOWL · si8 · CYCLONE · PORTA&GATE)",tag:"shop",parking:"",hl:true},
+      {time:"18:00",place:"마지막 밤 저녁",note:"아구 돼지 샤브샤브 / 이자카야+아와모리 / 스테이크",tag:"food",parking:"",hl:true},
+      {time:"19:30",place:"코쿠사이도리 야경 산책",note:"마지막 기념품 쇼핑 마무리",tag:"",parking:"",hl:false},
+      {time:"21:00",place:"숙소 복귀, 짐 정리",note:"",tag:"",parking:"",hl:false}
+    ]
+  },
+  {
+    title:"아침 & 귀국",
+    subtitle:"렌터카 반납 → 공항",
+    items:[
+      {time:"07:30",place:"기상, 체크아웃",note:"",tag:"",parking:"",hl:false},
+      {time:"08:00",place:"렌터카 반납",note:"영업소 검수 → 셔틀로 공항 이동",tag:"",parking:"",hl:false},
+      {time:"09:00",place:"포크타마고 오니기리",note:"공항 1층 도착 로비. 줄 길 수 있으니 여유 있게",tag:"food",parking:"",hl:true},
+      {time:"09:30",place:"체크인 & 공항 기념품점",note:"자탄연 과자 · 홍임타르트 마지막 쇼핑",tag:"shop",parking:"",hl:false},
+      {time:"~12:00",place:"출발 ✈️",note:"다음에 또 오자!",tag:"",parking:"",hl:false}
+    ]
+  }
+];
+
+let data = [];
+let editMode = false;
+
+function loadData() {
+  const urlData = getUrlData();
+  if (urlData) { data = urlData; saveLocal(); }
+  else {
+    const local = localStorage.getItem('okinawa_trip');
+    data = local ? JSON.parse(local) : JSON.parse(JSON.stringify(DEFAULT_DATA));
+  }
+}
+
+function saveLocal() { localStorage.setItem('okinawa_trip', JSON.stringify(data)); }
+
+function getUrlData() {
+  try {
+    const hash = location.hash.slice(1);
+    if (!hash) return null;
+    const json = decodeURIComponent(atob(hash));
+    const parsed = JSON.parse(json);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      history.replaceState(null, '', location.pathname);
+      return parsed;
+    }
+  } catch(e) {}
+  return null;
+}
+
+function makeUrl() {
+  const b = btoa(encodeURIComponent(JSON.stringify(data)));
+  return location.origin + location.pathname + '#' + b;
+}
+
+const tagMap = {food:['tag-food','맛집'],view:['tag-view','뷰포인트'],shop:['tag-shop','쇼핑'],beach:['tag-beach','해변']};
+
+function render() {
+  const ct = document.getElementById('itinerary');
+  ct.innerHTML = '';
+  data.forEach((day, di) => {
+    const sec = document.createElement('div');
+    sec.className = 'day';
+    sec.innerHTML = `
+      <div class="day-header">
+        <div class="day-num day-colors-${di}">D${di+1}</div>
+        <div>
+          <div class="day-title ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="title" data-di="${di}">${esc(day.title)}</div>
+          <div class="day-subtitle ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="subtitle" data-di="${di}">${esc(day.subtitle)}</div>
+        </div>
+      </div>
+      <div class="timeline" id="timeline-${di}"></div>
+      <button class="btn-add" onclick="addItem(${di})">+ 일정 추가</button>
+    `;
+    if (di > 0) { const dv = document.createElement('div'); dv.className='divider'; dv.textContent='~ ~ ~'; ct.appendChild(dv); }
+    ct.appendChild(sec);
+
+    const tl = sec.querySelector('.timeline');
+    day.items.forEach((item, ii) => {
+      const el = document.createElement('div');
+      el.className = `tl-item${item.hl?' highlight':''}`;
+      let tagHtml = '';
+      if (item.tag && tagMap[item.tag]) tagHtml = `<span class="tl-tag ${tagMap[item.tag][0]}">${tagMap[item.tag][1]}</span>`;
+      let parkHtml = '';
+      if (item.parking) parkHtml = `<div class="parking"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="parking" data-di="${di}" data-ii="${ii}">${esc(item.parking)}</span></div>`;
+
+      el.innerHTML = `
+        <button class="btn-del" onclick="delItem(${di},${ii})" title="삭제">✕</button>
+        <span class="tl-time ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="time" data-di="${di}" data-ii="${ii}">${esc(item.time)}</span>
+        <div class="tl-content">
+          <div class="tl-place ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="place" data-di="${di}" data-ii="${ii}">${esc(item.place)}</div>
+          <div class="tl-note ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="note" data-di="${di}" data-ii="${ii}">${esc(item.note)}</div>
+          ${tagHtml}${parkHtml}
+        </div>
+      `;
+      tl.appendChild(el);
+    });
+  });
+
+  if (!editMode) initScrollAnim();
+  document.querySelectorAll('.editable').forEach(el => {
+    el.addEventListener('blur', onEdit);
+    el.addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();el.blur()} });
+  });
+}
+
+function esc(s) { const d=document.createElement('div');d.textContent=s;return d.innerHTML; }
+
+function onEdit(e) {
+  const el = e.target;
+  const di = parseInt(el.dataset.di);
+  const ii = el.dataset.ii !== undefined ? parseInt(el.dataset.ii) : null;
+  const field = el.dataset.field;
+  const val = el.textContent.trim();
+
+  if (ii !== null) { data[di].items[ii][field] = val; }
+  else { data[di][field] = val; }
+  saveLocal();
+}
+
+function addItem(di) {
+  data[di].items.push({time:"00:00",place:"새 일정",note:"메모를 입력하세요",tag:"",parking:"",hl:false});
+  saveLocal(); render();
+}
+
+function delItem(di, ii) {
+  if (data[di].items.length <= 1) { showToast('최소 1개 항목은 있어야 해요'); return; }
+  data[di].items.splice(ii, 1);
+  saveLocal(); render();
+}
+
+function toggleEdit() {
+  editMode = !editMode;
+  document.body.classList.toggle('editing', editMode);
+  document.getElementById('fabEdit').classList.toggle('active', editMode);
+  document.getElementById('fabEdit').textContent = editMode ? '✓' : '✏️';
+  document.getElementById('fabShare').classList.toggle('show', editMode);
+  render();
+  showToast(editMode ? '편집 모드 ON — 클릭해서 수정!' : '편집 모드 OFF — 저장 완료!');
+}
+
+function shareItinerary() {
+  const url = makeUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('링크 복사 완료! 카톡으로 보내세요 💌'));
+  } else {
+    const ta = document.createElement('textarea'); ta.value = url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('링크 복사 완료! 카톡으로 보내세요 💌');
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function initScrollAnim() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'} });
+  },{threshold:.1});
+  document.querySelectorAll('.day').forEach(d => {
+    d.style.opacity='0';d.style.transform='translateY(30px)';d.style.transition='all .6s ease';obs.observe(d);
+  });
+  document.querySelectorAll('.tl-item').forEach((item,i) => {
+    item.style.opacity='0';item.style.transform='translateX(-10px)';
+    item.style.transition=`all .4s ease ${i*.03}s`;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateX(0)'}});
+    },{threshold:.1});
+    io.observe(item);
+  });
+}
+
+loadData();
+render();
+</script>
+</body>
+</html>
