@@ -65,6 +65,27 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--sand);color:var(--ni
 .btn-copy{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;padding:3px 10px;border-radius:20px;background:rgba(27,107,147,.08);color:var(--ocean);border:1px solid rgba(27,107,147,.2);cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;transition:all .2s;text-decoration:none}
 .btn-copy:hover{background:var(--ocean);color:#fff;border-color:var(--ocean)}
 .btn-copy::before{content:'📍';font-size:.7rem}
+.btn-park{background:rgba(244,162,97,.12);color:#C66B1F;border-color:rgba(244,162,97,.3);margin-left:6px;vertical-align:middle}
+.btn-park:hover{background:#C66B1F;color:#fff;border-color:#C66B1F}
+.btn-park::before{content:'🅿️';font-size:.7rem}
+
+.btn-nearby{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:5px 12px;border-radius:20px;background:rgba(232,132,107,.1);color:var(--coral);border:1px solid rgba(232,132,107,.25);cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;transition:all .2s;margin-top:8px}
+.btn-nearby:hover{background:var(--coral);color:#fff;border-color:var(--coral)}
+.btn-nearby::before{content:'🍴';font-size:.75rem}
+.btn-nearby.open{background:var(--coral);color:#fff;border-color:var(--coral)}
+.btn-nearby.open::before{content:'▾'}
+
+.nearby-panel{margin-top:10px;background:#fff;border-radius:12px;padding:14px 16px;border:1px solid rgba(0,0,0,.05);max-height:0;overflow:hidden;opacity:0;transition:all .3s ease;padding-top:0;padding-bottom:0;border-width:0}
+.nearby-panel.open{max-height:2000px;opacity:1;padding-top:14px;padding-bottom:14px;border-width:1px;margin-top:10px}
+.nearby-section{margin-bottom:14px}
+.nearby-section:last-child{margin-bottom:0}
+.nearby-label{font-size:.7rem;font-weight:700;color:var(--ocean);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(27,107,147,.1)}
+.nearby-label.shop{color:#7B1FA2;border-bottom-color:rgba(123,31,162,.1)}
+.nearby-item{padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.05)}
+.nearby-item:last-child{border:none}
+.nearby-name{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.nearby-note{font-size:.72rem;color:#888;line-height:1.5}
+.nearby-name .btn-copy{font-size:.6rem;padding:2px 8px}
 
 .divider{text-align:center;margin:3rem 0;color:#ccc;font-size:1.5rem;letter-spacing:12px}
 
@@ -212,12 +233,12 @@ const DEFAULT_DATA = [
       {time:"12:50",place:"렌터카 픽업",note:"셔틀 → 영업소 → 서류 · 보험 · 차량 확인 (약 45분)",tag:"",parking:"",hl:false,addr:""},
       {time:"13:35",place:"출발, 국도 58번 북상",note:"차탄까지 약 40분",tag:"",parking:"",hl:false,addr:""},
       {time:"14:15",place:"숙소 체크인",note:"비치프론트 타워 미하마. 차는 숙소 주차장에.",tag:"",parking:"숙소 전용 주차장",hl:false,addr:"Beach Front Tower Mihama"},
-      {time:"14:35",place:"점심 식사",note:"아메리칸 빌리지 내. 타코라이스 · A&W · 스테이크",tag:"food",parking:"",hl:true,addr:"American Village Chatan"},
+      {time:"14:35",place:"점심 식사",note:"아메리칸 빌리지 내. 타코라이스 · A&W · 스테이크",tag:"food",parking:"",hl:true,addr:"American Village Chatan",nearby:"av_lunch"},
       {time:"15:15",place:"아라하 비치",note:"숙소 바로 앞! 해변 산책 · 소화 타임",tag:"beach",parking:"",hl:false,addr:"Araha Beach"},
       {time:"17:00",place:"선셋 비치",note:"도보 15분. 일몰 타이밍에 맞춰 이동",tag:"view",parking:"",hl:true,addr:"Chatan Park Sunset Beach"},
       {time:"18:00",place:"🌅 일몰 감상",note:"하늘이 오렌지색으로 물드는 순간",tag:"",parking:"",hl:false,addr:""},
       {time:"18:30",place:"아메리칸 빌리지",note:"디포 아일랜드 쇼핑몰 · 해안 보드워크 야경",tag:"shop",parking:"",hl:false,addr:"American Village Chatan"},
-      {time:"19:30",place:"저녁 식사",note:"빌리지 내 식당에서",tag:"food",parking:"",hl:true,addr:""},
+      {time:"19:30",place:"저녁 식사",note:"빌리지 내 식당에서",tag:"food",parking:"",hl:true,addr:"",nearby:"av_dinner"},
       {time:"20:30",place:"블루씰 아이스크림",note:"베니이모(자색고구마) 맛 필수! 포토존도",tag:"food",parking:"",hl:false,addr:"Blue Seal Chatan"},
       {time:"21:00",place:"아라하 비치 야간 산책",note:"숙소 앞 밤바다. 파도 소리 들으며",tag:"",parking:"",hl:false,addr:"Araha Beach"},
       {time:"21:30",place:"바에서 마무리",note:"Earth Village Izakaya / Barragan / AMF (도보)",tag:"",parking:"",hl:true,addr:"Earth Village Izakaya Chatan"}
@@ -231,14 +252,14 @@ const DEFAULT_DATA = [
       {time:"08:00",place:"출발, 북쪽으로!",note:"",tag:"",parking:"",hl:false,addr:""},
       {time:"08:40",place:"만좌모",note:"입장 100엔. 코끼리 바위 + 절벽 산책 (20~30분)",tag:"view",parking:"전용 주차장, 무료",hl:true,addr:"万座毛"},
       {time:"10:20",place:"츄라우미 수족관",note:"입장 2,180엔. 고래상어 · 돌고래 쇼(무료) · 터치풀 (약 2시간)",tag:"view",parking:"북게이트 P7 입체주차장, 무료, 1000대+",hl:true,addr:"沖縄美ら海水族館 北ゲート"},
-      {time:"12:30",place:"비세 후쿠기 가로수길",note:"수족관에서 도보 5분. 초록 터널 산책 + 카페 점심",tag:"food",parking:"주변 민가 유료 주차장 300~500엔",hl:true,addr:"備瀬のフクギ並木"},
-      {time:"14:00",place:"코우리 대교 & 코우리섬",note:"에메랄드빛 바다 위 2km 다리! 전망 포인트 사진 필수",tag:"view",parking:"",hl:true,addr:"古宇利大橋"},
+      {time:"12:30",place:"비세 후쿠기 가로수길 + 점심",note:"수족관에서 도보 5분. 초록 터널 산책 + 모토부 카페 점심",tag:"food",parking:"주변 민가 유료 주차장 300~500엔",hl:true,addr:"備瀬のフクギ並木",nearby:"motobu",parkAddr:"備瀬のフクギ並木 駐車場"},
+      {time:"14:00",place:"코우리 대교 & 코우리섬",note:"에메랄드빛 바다 위 2km 다리! 전망 포인트 사진 필수",tag:"view",parking:"",hl:true,addr:"古宇利大橋",nearby:"kouri"},
       {time:"14:10",place:"코우리 오션 타워",note:"입장 1,000엔. 자동 카트 · 조개 박물관 · 360도 전망",tag:"",parking:"전용 주차장, 무료 (좁으니 일찍)",hl:false,addr:"古宇利オーシャンタワー"},
       {time:"15:10",place:"코우리섬 한 바퀴",note:"드라이브 15분 + 하트 록 비치 + 카페 음료",tag:"beach",parking:"",hl:false,addr:"ハートロック 古宇利島"},
-      {time:"16:10",place:"세소코 비치",note:"투명한 바다에 발 담그며 휴식",tag:"beach",parking:"전용 주차장 1,000엔 (1일)",hl:false,addr:"瀬底ビーチ"},
+      {time:"16:10",place:"세소코 비치",note:"투명한 바다에 발 담그며 휴식",tag:"beach",parking:"전용 주차장 1,000엔 (1일)",hl:false,addr:"瀬底ビーチ",parkAddr:"瀬底ビーチ駐車場"},
       {time:"17:00",place:"복귀 시작",note:"차탄까지 약 1시간 20분",tag:"",parking:"",hl:false,addr:""},
       {time:"18:20",place:"숙소 도착",note:"샤워 · 휴식",tag:"",parking:"",hl:false,addr:"Beach Front Tower Mihama"},
-      {time:"19:30",place:"저녁 식사",note:"차탄 주변, 어제와 다른 장르로",tag:"food",parking:"",hl:true,addr:""},
+      {time:"19:30",place:"저녁 식사",note:"차탄 주변, 어제와 다른 장르로",tag:"food",parking:"",hl:true,addr:"",nearby:"chatan_dinner"},
       {time:"20:30",place:"아라하 비치 야간 산책 & 바",note:"여유 있으면 도보로 빌리지 쪽 바",tag:"",parking:"",hl:false,addr:"Araha Beach"}
     ]
   },
@@ -250,12 +271,12 @@ const DEFAULT_DATA = [
       {time:"10:30",place:"아시비나 아울렛몰",note:"BEAMS 아울렛 등 셀렉트샵 쇼핑 (1시간)",tag:"shop",parking:"대형 무료 주차장",hl:true,addr:"沖縄アウトレットモール あしびなー"},
       {time:"11:30",place:"슈리성으로 이동",note:"아시비나에서 약 25분",tag:"",parking:"",hl:false,addr:""},
       {time:"12:00",place:"슈리성",note:"성곽 산책 무료 / 유료 400엔. 나하 시내 전망 (1시간)",tag:"view",parking:"현영 주차장 P1/P2, 320엔",hl:true,addr:"首里城公園 駐車場"},
-      {time:"13:00",place:"더네스트 나하 체크인",note:"짐 내리고 차 주차. 여기서부터 전부 도보!",tag:"",parking:"숙소 주차장 or 코인파킹 (12h 최대 700~1,000엔)",hl:false,addr:"The Nest Naha"},
+      {time:"13:00",place:"더네스트 나하 체크인",note:"짐 내리고 차 주차. 여기서부터 전부 도보!",tag:"",parking:"숙소 주차장 or 코인파킹 (12h 최대 700~1,000엔)",hl:false,addr:"The Nest Naha",parkAddr:"タイムズ 那覇久茂地"},
       {time:"13:30",place:"나미노우에 신사",note:"절벽 위 신사 + 아래 작은 해변 (30분)",tag:"view",parking:"",hl:false,addr:"波上宮"},
-      {time:"14:00",place:"마키시 공설시장 점심",note:"1층 해산물 골라서 2층에서 조리! 조리비 1인 500엔",tag:"food",parking:"",hl:true,addr:"第一牧志公設市場"},
+      {time:"14:00",place:"마키시 공설시장 점심",note:"1층 해산물 골라서 2층에서 조리! 조리비 1인 500엔",tag:"food",parking:"",hl:true,addr:"第一牧志公設市場",nearby:"naha_lunch"},
       {time:"15:00",place:"츠보야 도자기 거리",note:"마키시에서 도보 5분. 시사 기념품 · 도자기 가게",tag:"shop",parking:"",hl:false,addr:"壺屋やちむん通り"},
-      {time:"15:30",place:"코쿠사이도리 & 우키시마도리",note:"기념품 · BEAMS + 아메카지 고착야 (FISH BOWL · si8 · CYCLONE · PORTA&GATE)",tag:"shop",parking:"",hl:true,addr:"国際通り 那覇"},
-      {time:"18:00",place:"마지막 밤 저녁",note:"아구 돼지 샤브샤브 / 이자카야+아와모리 / 스테이크",tag:"food",parking:"",hl:true,addr:""},
+      {time:"15:30",place:"코쿠사이도리 & 우키시마도리",note:"기념품 · BEAMS + 아메카지 고착야 (FISH BOWL · si8 · CYCLONE · PORTA&GATE)",tag:"shop",parking:"",hl:true,addr:"国際通り 那覇",nearby:"naha_uki"},
+      {time:"18:00",place:"마지막 밤 저녁",note:"아구 돼지 샤브샤브 / 이자카야+아와모리 / 스테이크",tag:"food",parking:"",hl:true,addr:"",nearby:"naha_dinner"},
       {time:"19:30",place:"코쿠사이도리 야경 산책 + 돈키호테",note:"24시간 영업! 로이스 초콜릿 · 시로이 코이비토 · 자가비 · 키캣 한정 · 약·화장품 · 오키나와 굿즈. 면세 5,500엔 이상 시 여권 챙겨 면세 카운터로!",tag:"shop",parking:"",hl:true,addr:"ドン・キホーテ 国際通り店"},
       {time:"20:30",place:"숙소 복귀, 짐 정리",note:"",tag:"",parking:"",hl:false,addr:"The Nest Naha"}
     ]
@@ -278,6 +299,97 @@ const DEFAULT_DATA = [
     ]
   }
 ];
+
+const NEARBY = {
+  av_lunch: {
+    food: [
+      {name:"Captain Kangaroo (キャプテンカンガルー)", note:"일본 수제버거 1티어. 차로 5분, 줄 길수 있음 (1시 전 추천)", addr:"キャプテンカンガルー 沖縄"},
+      {name:"Tony Roma's", note:"디포 아일랜드 내. 미국 정통 BBQ 립", addr:"Tony Roma's 北谷"},
+      {name:"Tacos-ya (タコス屋)", note:"빌리지 내. 진짜 오키나와 타코·타코라이스, 가성비", addr:"タコス屋 北谷"},
+      {name:"A&W 차탄점", note:"오키나와 한정 미국 패스트푸드. 루트비어 무한리필", addr:"A&W 北谷"},
+      {name:"Zhyvago Coffee", note:"디포 아일랜드 내. 미서부 스타일 카페, 식후 커피", addr:"Zhyvago Coffee Works Okinawa"}
+    ],
+    shop: [
+      {name:"HABU BOX", note:"디포 아일랜드 내. 오키나와 토착 캐주얼, 시사 모티브 티셔츠", addr:"HABU BOX 北谷"},
+      {name:"American Depot", note:"빌리지 메인. 미국 빈티지·밀리터리·웨스턴, 가죽 자켓·데님", addr:"American Depot 北谷"},
+      {name:"Vessel", note:"디포 아일랜드 내 셀렉트샵. BEAMS 결", addr:"Vessel Depot Island"}
+    ]
+  },
+  av_dinner: {
+    food: [
+      {name:"Transit Cafe (トランジットカフェ)", note:"미야기 해안 2층 통유리 오션뷰. 일몰·디너 끝판왕, 와인. 예약 추천 ⭐", addr:"トランジットカフェ 北谷"},
+      {name:"Mekaru Steak (メカル ステーキ)", note:"오키나와 정통 철판 스테이크. 미군 단골 ⭐", addr:"メカルステーキ 北谷"},
+      {name:"Steak House 88 차탄점", note:"오키나와 스테이크 체인 1티어. 200g~ 푸짐", addr:"ステーキハウス88 北谷店"},
+      {name:"AKARA Sunset Beach", note:"빌리지 선셋비치 옆. 시푸드 + 오키나와 요리, 분위기 굿", addr:"AKARA サンセットビーチ 北谷"},
+      {name:"沖縄居酒屋 ちぬまん", note:"차탄. 오키나와 향토요리 + 아와모리, 로컬 분위기", addr:"ちぬまん 北谷"}
+    ],
+    shop: []
+  },
+  chatan_dinner: {
+    food: [
+      {name:"焼肉 牛 (Yakiniku Gyu) 차탄점", note:"오키나와산 와규 야끼니쿠. 1일차가 버거였다면 2일차는 고기!", addr:"焼肉 牛 北谷"},
+      {name:"Hanagasa Shokudo (花笠食堂)", note:"오키나와 가정식 정식. 가성비 갑, 로컬 분위기", addr:"花笠食堂 北谷"},
+      {name:"Pizzeria Marino", note:"차탄. 화덕피자 + 와인, 어제 일식이었으면 분위기 전환", addr:"Pizzeria Marino 北谷"},
+      {name:"海風 (Umikaze)", note:"차탄 시푸드. 오키나와산 활어회·튀김", addr:"海風 北谷"},
+      {name:"沖縄そば じんく屋", note:"늦게 가볍게 끝내고 싶을 때. 정통 오키나와 소바", addr:"じんく屋 北谷"}
+    ],
+    shop: []
+  },
+  naha_lunch: {
+    food: [
+      {name:"きらく (Kiraku) - 마키시 시장 2층", note:"시장 2층 조리식당 중 가장 유명. 사시미·튀김·정식", addr:"きらく 第一牧志公設市場"},
+      {name:"うどん 西原家", note:"마키시 인근 우동집. 가벼운 점심", addr:"西原家 那覇"},
+      {name:"Yamashiro Soba (山城そば)", note:"마키시 도보권 오키나와 소바 노포", addr:"山城そば 那覇"},
+      {name:"oHacorté Bakery (오하코르테)", note:"우키시마도리. 점심 후 디저트로 타르트 한 조각 ⭐", addr:"オハコルテベーカリー 那覇"},
+      {name:"C&C BREAKFAST", note:"우키시마도리 진입로. 하와이안 브런치 (아침 일정에 더 좋음)", addr:"C&C BREAKFAST OKINAWA"}
+    ],
+    shop: []
+  },
+  motobu: {
+    food: [
+      {name:"花人逢 (Kajinhou)", note:"산속 절벽 위 류큐 가옥 카페. 인생 오션뷰, 피자·카레", addr:"花人逢 本部"},
+      {name:"Kishimoto Shokudo (きしもと食堂)", note:"1905년 창업 오키나와 소바 노포. 가다랑어 깔끔 국물", addr:"きしもと食堂 本部"},
+      {name:"Pizzeria da ENZO", note:"산속 외딴 곳. 이태리 셰프 화덕피자, 맛은 보장", addr:"Pizzeria da ENZO 本部"},
+      {name:"Cahaya Bulan (カフェ チャハヤブラン)", note:"비세 가로수길 끝. 에메랄드 바다뷰 카페", addr:"カフェ チャハヤブラン"},
+      {name:"Capful (カプフル)", note:"모토부, 소바 + 빙수. 가벼운 점심·간식", addr:"カプフル 本部"}
+    ],
+    shop: []
+  },
+  kouri: {
+    food: [
+      {name:"Shrimp Wagon (シュリンプワゴン)", note:"코우리섬 시그니처. 갈릭 새우 푸드트럭, 사진 예쁨", addr:"シュリンプワゴン 古宇利"},
+      {name:"L LOTA", note:"코우리섬 오션뷰 카페. 케이크·라떼", addr:"L LOTA 古宇利"},
+      {name:"Ti-da Beach Parlour", note:"코우리 대교 옆. 트로피컬 음료, 과일 빙수", addr:"ティーダビーチパーラー 古宇利"}
+    ],
+    shop: []
+  },
+  naha_uki: {
+    food: [
+      {name:"oHacorté Bakery (오하코르테)", note:"우키시마도리 입구. 나하 최고 타르트 전문점", addr:"オハコルテベーカリー 那覇"},
+      {name:"C&C BREAKFAST", note:"우키시마도리 진입로. 하와이안 브런치, 팬케이크·에그베네딕트", addr:"C&C BREAKFAST OKINAWA"},
+      {name:"田仲ぱぱ (Tanaka Papa)", note:"빈티지샵 거리 안 작은 카페. 핸드드립", addr:"田仲ぱぱ 那覇"}
+    ],
+    shop: [
+      {name:"The Depot RYUKYU", note:"코쿠사이도리. 미군 빈티지·M-65·N-1·워크웨어 ⭐", addr:"DEPOT 国際通り"},
+      {name:"2nd STREET 沖縄那覇店", note:"일본 최대 중고 의류 체인. 단톤·BEAMS 노림수 ⭐⭐", addr:"セカンドストリート 那覇店"},
+      {name:"GARB DOMINGO", note:"우키시마도리. 모던 야치문(오키나와 도자기) 셀렉트", addr:"GARB DOMINGO 那覇"},
+      {name:"mofgmona", note:"우키시마도리. 류큐 글라스·핸드메이드 잡화", addr:"mofgmona 那覇"},
+      {name:"Splash Okinawa", note:"우키시마도리. 오키나와 디자이너 셀렉트", addr:"Splash Okinawa 那覇"},
+      {name:"Yacchi & Moon", note:"츠보야. 인스타 감성 모던 야치문", addr:"やっちとムーン 壺屋"},
+      {name:"guma guwa", note:"츠보야. 류큐 글라스 전문", addr:"guma guwa 壺屋"},
+      {name:"craft house Sprout", note:"츠보야. 작가물 도자기", addr:"クラフトハウス スプラウト 壺屋"}
+    ]
+  },
+  naha_dinner: {
+    food: [
+      {name:"Yunangi (ゆうなんぎい)", note:"60년 노포 오키나와 정식. 라후테·미미가·고야참푸루 풀세트, 마지막 밤 끝판왕 ⭐", addr:"ゆうなんぎい 那覇"},
+      {name:"アグー豚しゃぶしゃぶ 田 (Den)", note:"아구 돼지 샤브샤브 본점. 코스 깔끔, 데이트 분위기", addr:"アグー豚しゃぶしゃぶ田 那覇"},
+      {name:"やんばる料理 偉大", note:"코쿠사이도리. 얀바루 향토요리 + 아와모리", addr:"やんばる料理 偉大 那覇"},
+      {name:"Steak House 88 코쿠사이도리점", note:"오키나와 스테이크 체인 1티어, 든든하게 마무리", addr:"ステーキハウス88 国際通り店"}
+    ],
+    shop: []
+  }
+};
 
 const PHRASES = [
   {ko:"안녕하세요",jp:"こんにちは",ro:"콘니치와"},
@@ -409,11 +521,42 @@ function render() {
       let tagHtml = '';
       if (item.tag && tagMap[item.tag]) tagHtml = `<span class="tl-tag ${tagMap[item.tag][0]}">${tagMap[item.tag][1]}</span>`;
       let parkHtml = '';
-      if (item.parking) parkHtml = `<div class="parking"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="parking" data-di="${di}" data-ii="${ii}">${esc(item.parking)}</span></div>`;
+      if (item.parking) {
+        let parkBtn = '';
+        if (item.parkAddr) {
+          const purl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.parkAddr)}`;
+          parkBtn = ` <a class="btn-copy btn-park" href="${purl}" target="_blank" rel="noopener" onclick="copyAlso('${esc(item.parkAddr).replace(/'/g,"\\'")}')">P 위치</a>`;
+        }
+        parkHtml = `<div class="parking"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="parking" data-di="${di}" data-ii="${ii}">${esc(item.parking)}</span>${parkBtn}</div>`;
+      }
       let mapBtn = '';
       if (item.addr) {
         const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.addr)}`;
         mapBtn = `<a class="btn-copy" href="${url}" target="_blank" rel="noopener" onclick="copyAlso('${esc(item.addr).replace(/'/g,"\\'")}')">지도 열기</a>`;
+      }
+
+      let nearbyHtml = '';
+      if (item.nearby && NEARBY[item.nearby]) {
+        const nb = NEARBY[item.nearby];
+        const panelId = `nb-${di}-${ii}`;
+        let panelInner = '';
+        if (nb.food && nb.food.length) {
+          panelInner += `<div class="nearby-section"><div class="nearby-label">🍴 근처 맛집</div>`;
+          nb.food.forEach(f => {
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(f.addr)}`;
+            panelInner += `<div class="nearby-item"><div class="nearby-name">${esc(f.name)}<a class="btn-copy" href="${url}" target="_blank" rel="noopener" onclick="copyAlso('${esc(f.addr).replace(/'/g,"\\'")}')">지도</a></div><div class="nearby-note">${esc(f.note)}</div></div>`;
+          });
+          panelInner += `</div>`;
+        }
+        if (nb.shop && nb.shop.length) {
+          panelInner += `<div class="nearby-section"><div class="nearby-label shop">🛍️ 볼만한 가게</div>`;
+          nb.shop.forEach(s => {
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.addr)}`;
+            panelInner += `<div class="nearby-item"><div class="nearby-name">${esc(s.name)}<a class="btn-copy" href="${url}" target="_blank" rel="noopener" onclick="copyAlso('${esc(s.addr).replace(/'/g,"\\'")}')">지도</a></div><div class="nearby-note">${esc(s.note)}</div></div>`;
+          });
+          panelInner += `</div>`;
+        }
+        nearbyHtml = `<button class="btn-nearby" onclick="toggleNearby('${panelId}', this)">근처 맛집·매장 보기</button><div class="nearby-panel" id="${panelId}">${panelInner}</div>`;
       }
 
       el.innerHTML = `
@@ -422,7 +565,7 @@ function render() {
         <div class="tl-content">
           <div class="tl-place"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="place" data-di="${di}" data-ii="${ii}">${esc(item.place)}</span>${mapBtn}</div>
           <div class="tl-note ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="note" data-di="${di}" data-ii="${ii}">${esc(item.note)}</div>
-          ${tagHtml}${parkHtml}
+          ${tagHtml}${parkHtml}${nearbyHtml}
         </div>
       `;
       tl.appendChild(el);
@@ -440,6 +583,14 @@ function esc(s) { const d=document.createElement('div');d.textContent=s;return d
 
 function copyAlso(addr) {
   if (navigator.clipboard) navigator.clipboard.writeText(addr).catch(()=>{});
+}
+
+function toggleNearby(panelId, btn) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.textContent = isOpen ? '접기' : '근처 맛집·매장 보기';
 }
 
 function onEdit(e) {
