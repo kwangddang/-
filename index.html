@@ -14,16 +14,14 @@
 }
 body{font-family:'Noto Sans KR',sans-serif;background:var(--sand);color:var(--night);overflow-x:hidden}
 
-.hero{
-min-height:100vh;display:flex;flex-direction:column;
-align-items:center;justify-content:center;text-align:center;
-background:linear-gradient(180deg,#87CEEB 0%,#4DB8D5 30%,var(--ocean) 60%,#1a5276 100%);
-position:relative;overflow:hidden;padding:2rem;
-}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#87CEEB 0%,#4DB8D5 30%,var(--ocean) 60%,#1a5276 100%);position:relative;overflow:hidden;padding:2rem}
 .hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:var(--sand);border-radius:50% 50% 0 0 / 100% 100% 0 0}
 .hero-sub{font-family:'Caveat',cursive;font-size:1.3rem;color:rgba(255,255,255,.8);margin-bottom:.5rem;letter-spacing:2px;animation:fadeDown .8s ease both}
-.hero h1{font-family:'Caveat',cursive;font-size:clamp(3rem,8vw,5.5rem);color:#fff;font-weight:600;line-height:1.2;margin-bottom:1rem;animation:fadeDown 1s ease both;animation-delay:.2s;text-shadow:0 2px 20px rgba(0,0,0,.15)}
-.hero-date{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:rgba(255,255,255,.7);letter-spacing:3px;animation:fadeDown 1s ease both;animation-delay:.5s;background:rgba(255,255,255,.1);padding:8px 20px;border-radius:30px;backdrop-filter:blur(10px)}
+.hero h1{font-family:'Caveat',cursive;font-size:clamp(3rem,8vw,5.5rem);color:#fff;font-weight:600;line-height:1.2;margin-bottom:1.5rem;animation:fadeDown 1s ease both;animation-delay:.2s;text-shadow:0 2px 20px rgba(0,0,0,.15)}
+.dday{font-family:'Caveat',cursive;font-size:3rem;color:#fff;font-weight:600;margin-bottom:.5rem;cursor:pointer;animation:fadeDown 1s ease both;animation-delay:.4s;text-shadow:0 2px 20px rgba(0,0,0,.2)}
+.dday:hover{opacity:.85}
+.dday-label{font-size:.7rem;color:rgba(255,255,255,.65);letter-spacing:2px;margin-top:-4px;font-family:'JetBrains Mono',monospace}
+.hero-date{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:rgba(255,255,255,.7);letter-spacing:3px;animation:fadeDown 1s ease both;animation-delay:.5s;background:rgba(255,255,255,.1);padding:7px 18px;border-radius:30px;backdrop-filter:blur(10px);margin-top:1rem}
 .hero-scroll{position:absolute;bottom:140px;animation:fadeDown 1s ease both, bob 2s ease-in-out infinite;animation-delay:.8s;color:rgba(255,255,255,.6);font-size:.8rem;letter-spacing:2px}
 .hero-scroll::after{content:'↓';display:block;text-align:center;margin-top:4px;font-size:1.2rem}
 
@@ -37,7 +35,6 @@ position:relative;overflow:hidden;padding:2rem;
 .comment{color:#546e7a}.keyword{color:#82AAFF}.string{color:#C3E88D}.func{color:#F4A261}.var{color:#E8846B}
 
 .content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
-
 .day{margin-bottom:4rem}
 .day-header{display:flex;align-items:center;gap:16px;margin-bottom:2rem}
 .day-num{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Caveat',cursive;font-size:1.8rem;font-weight:600;color:#fff}
@@ -55,7 +52,7 @@ position:relative;overflow:hidden;padding:2rem;
 .tl-item::before{content:'';position:absolute;left:-24px;top:18px;width:10px;height:10px;border-radius:50%;border:2px solid var(--ocean);background:var(--sand)}
 .tl-item.highlight::before{background:var(--coral);border-color:var(--coral)}
 .tl-time{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ocean);min-width:48px;padding-top:2px;font-weight:400}
-.tl-place{font-weight:500;font-size:.95rem;margin-bottom:3px}
+.tl-place{font-weight:500;font-size:.95rem;margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tl-note{font-size:.8rem;color:#777;line-height:1.6;font-weight:300}
 .tl-tag{display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:20px;margin-top:4px;font-weight:500}
 .tag-food{background:#FFF3E0;color:#E65100}
@@ -64,6 +61,11 @@ position:relative;overflow:hidden;padding:2rem;
 .tag-beach{background:#E0F7FA;color:#00838F}
 .parking{background:var(--foam);border-radius:10px;padding:10px 14px;margin-top:6px;font-size:.75rem;color:#555;border-left:3px solid var(--ocean)}
 .parking::before{content:'P ';font-weight:700;color:var(--ocean)}
+
+.btn-copy{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;padding:3px 10px;border-radius:20px;background:rgba(27,107,147,.08);color:var(--ocean);border:1px solid rgba(27,107,147,.2);cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;transition:all .2s;text-decoration:none}
+.btn-copy:hover{background:var(--ocean);color:#fff;border-color:var(--ocean)}
+.btn-copy::before{content:'📍';font-size:.7rem}
+
 .divider{text-align:center;margin:3rem 0;color:#ccc;font-size:1.5rem;letter-spacing:12px}
 
 .footer{text-align:center;padding:4rem 2rem;background:linear-gradient(0deg,var(--deep) 0%,var(--night) 100%);color:rgba(255,255,255,.5)}
@@ -71,72 +73,78 @@ position:relative;overflow:hidden;padding:2rem;
 .footer-msg{font-family:'Caveat',cursive;font-size:1.5rem;color:rgba(255,255,255,.8);margin-bottom:.5rem}
 .footer-sub{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.3)}
 
-/* EDIT MODE */
-.fab{
-position:fixed;bottom:24px;right:24px;z-index:100;
-width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
-background:var(--ocean);color:#fff;font-size:1.3rem;
-box-shadow:0 4px 20px rgba(27,107,147,.4);transition:all .2s;
-display:flex;align-items:center;justify-content:center;
-}
-.fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(27,107,147,.5)}
-.fab.active{background:var(--coral)}
-.fab-share{
-position:fixed;bottom:24px;right:90px;z-index:100;
-width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
-background:var(--palm);color:#fff;font-size:1.1rem;
-box-shadow:0 4px 16px rgba(42,127,98,.4);transition:all .3s;
-display:none;align-items:center;justify-content:center;
-}
+/* FAB stack */
+.fab-stack{position:fixed;bottom:24px;right:24px;z-index:100;display:flex;flex-direction:column;gap:12px}
+.fab{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:1.2rem;box-shadow:0 4px 18px rgba(0,0,0,.2);transition:all .2s;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-weight:500}
+.fab:hover{transform:scale(1.08)}
+.fab-edit{background:var(--ocean)}
+.fab-edit.active{background:var(--coral)}
+.fab-share{background:var(--palm);display:none}
 .fab-share.show{display:flex}
-.fab-share:hover{transform:scale(1.08)}
+.fab-jp{background:#D4537E}
+.fab-pack{background:#8E7CC3}
 
 .editing .tl-item{border:1.5px dashed transparent;position:relative}
 .editing .tl-item:hover{border-color:var(--ocean);background:rgba(27,107,147,.03)}
 .editing .editable{cursor:text;border-bottom:1px dashed rgba(27,107,147,.3);padding-bottom:1px;outline:none;min-width:30px;display:inline-block}
 .editing .editable:focus{border-bottom-color:var(--coral);background:rgba(232,132,107,.05)}
 
-.btn-add{
-display:none;width:100%;padding:10px;margin-top:8px;
-border:2px dashed #ccc;border-radius:10px;background:transparent;
-color:#aaa;font-size:.8rem;cursor:pointer;transition:all .2s;
-font-family:'Noto Sans KR',sans-serif;
-}
+.btn-add{display:none;width:100%;padding:10px;margin-top:8px;border:2px dashed #ccc;border-radius:10px;background:transparent;color:#aaa;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif}
 .btn-add:hover{border-color:var(--ocean);color:var(--ocean);background:rgba(27,107,147,.03)}
 .editing .btn-add{display:block}
 
-.btn-del{
-display:none;position:absolute;top:8px;right:8px;
-width:24px;height:24px;border-radius:50%;border:none;
-background:rgba(220,53,69,.1);color:#dc3545;font-size:.8rem;
-cursor:pointer;transition:all .2s;
-align-items:center;justify-content:center;
-}
+.btn-del{display:none;position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(220,53,69,.1);color:#dc3545;font-size:.8rem;cursor:pointer;transition:all .2s;align-items:center;justify-content:center}
 .btn-del:hover{background:rgba(220,53,69,.2)}
 .editing .btn-del{display:flex}
 
-.toast{
-position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
-background:var(--night);color:#fff;padding:12px 24px;border-radius:10px;
-font-size:.85rem;opacity:0;transition:all .3s;z-index:200;
-pointer-events:none;white-space:nowrap;
-}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--night);color:#fff;padding:12px 24px;border-radius:10px;font-size:.85rem;opacity:0;transition:all .3s;z-index:300;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-.edit-day-header .editable{cursor:text;border-bottom:1px dashed rgba(27,107,147,.3);padding-bottom:1px}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(12,27,42,.5);backdrop-filter:blur(4px);z-index:200;display:none;align-items:flex-end;justify-content:center;padding:0;animation:fadeIn .25s ease}
+.modal-overlay.show{display:flex}
+.modal{background:var(--sand);width:100%;max-width:560px;max-height:85vh;border-radius:20px 20px 0 0;overflow-y:auto;animation:slideUp .3s ease;position:relative}
+@media(min-width:600px){.modal-overlay{align-items:center;padding:1rem}.modal{border-radius:20px;max-height:80vh}}
+.modal-head{position:sticky;top:0;background:var(--sand);padding:1.2rem 1.5rem 1rem;border-bottom:1px solid rgba(0,0,0,.06);z-index:2;display:flex;justify-content:space-between;align-items:center}
+.modal-title{font-size:1.1rem;font-weight:700}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888;padding:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(0,0,0,.05)}
+.modal-body{padding:1rem 1.5rem 2rem}
+
+.phrase{padding:14px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.phrase:last-child{border:none}
+.phrase-ko{font-size:.85rem;color:#888;margin-bottom:4px}
+.phrase-jp{font-size:1.05rem;font-weight:500;margin-bottom:3px}
+.phrase-romaji{font-size:.78rem;color:var(--ocean);font-family:'JetBrains Mono',monospace}
+
+.pack-cat{font-size:.75rem;font-weight:700;color:var(--ocean);text-transform:uppercase;letter-spacing:1px;margin:1.2rem 0 .5rem}
+.pack-cat:first-child{margin-top:0}
+.pack-item{display:flex;align-items:center;gap:12px;padding:10px 4px;cursor:pointer;border-radius:8px;transition:background .15s}
+.pack-item:hover{background:rgba(27,107,147,.04)}
+.pack-check{width:22px;height:22px;border-radius:6px;border:2px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.pack-item.done .pack-check{background:var(--palm);border-color:var(--palm)}
+.pack-item.done .pack-check::after{content:'✓';color:#fff;font-size:.85rem;font-weight:700}
+.pack-label{font-size:.92rem;flex:1}
+.pack-item.done .pack-label{color:#aaa;text-decoration:line-through}
+.pack-progress{background:var(--foam);padding:12px 16px;border-radius:10px;margin-bottom:1rem;font-size:.85rem;color:var(--ocean);text-align:center;font-weight:500}
+
+.date-input{background:rgba(255,255,255,.95);border:none;border-radius:10px;padding:10px 16px;font-size:.95rem;font-family:'Noto Sans KR',sans-serif;color:var(--night);outline:none;display:block;margin:0 auto}
 
 @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
 
 @media(max-width:600px){
 .tl-item{padding:8px 12px}
 .day-header{gap:12px}
 .day-num{width:52px;height:52px;font-size:1.5rem}
 .terminal-body{font-size:.7rem;padding:16px}
-.fab{bottom:16px;right:16px;width:50px;height:50px;font-size:1.1rem}
-.fab-share{bottom:16px;right:76px;width:42px;height:42px;font-size:1rem}
+.fab-stack{bottom:16px;right:16px;gap:10px}
+.fab{width:46px;height:46px;font-size:1rem}
+.dday{font-size:2.4rem}
 }
 </style>
 </head>
@@ -145,7 +153,9 @@ pointer-events:none;white-space:nowrap;
 <section class="hero">
 <p class="hero-sub">// 우리의 첫 오키나와</p>
 <h1>희원이와 광현이의,<br>오키나와 여행</h1>
-<div class="hero-date">2026 . OKINAWA . 3N4D</div>
+<div class="dday" id="dday" onclick="setTripDate()">D-??</div>
+<div class="dday-label" id="ddayLabel">탭해서 출발일 설정</div>
+<div class="hero-date">2026.04.10 - 04.13 . OKINAWA</div>
 <div class="hero-scroll">SCROLL</div>
 </section>
 
@@ -161,7 +171,7 @@ pointer-events:none;white-space:nowrap;
 &nbsp;&nbsp;with: <span class="string">"너 ♡"</span><br>
 };<br><br>
 <span class="func">console.log</span>(<span class="string">"같이 가자!"</span>);<br>
-<span class="comment">// ✏️ 수정하고 싶으면 오른쪽 아래 연필 버튼!</span>
+<span class="comment">// 📍지도 / あ회화 / ✓준비물 버튼 활용!</span>
 </div>
 </div>
 
@@ -173,9 +183,24 @@ pointer-events:none;white-space:nowrap;
 <div class="footer-sub">made by 광현</div>
 </footer>
 
-<button class="fab" id="fabEdit" onclick="toggleEdit()" title="편집 모드">✏️</button>
-<button class="fab-share" id="fabShare" onclick="shareItinerary()" title="공유하기">🔗</button>
+<div class="fab-stack">
+<button class="fab fab-pack" onclick="openModal('pack')" title="준비물">✓</button>
+<button class="fab fab-jp" onclick="openModal('jp')" title="일본어 회화">あ</button>
+<button class="fab fab-share" id="fabShare" onclick="shareItinerary()" title="공유">🔗</button>
+<button class="fab fab-edit" id="fabEdit" onclick="toggleEdit()" title="편집">✏️</button>
+</div>
+
 <div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+<div class="modal">
+<div class="modal-head">
+<div class="modal-title" id="modalTitle"></div>
+<button class="modal-close" onclick="closeModal()">✕</button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
 
 <script>
 const DEFAULT_DATA = [
@@ -183,70 +208,141 @@ const DEFAULT_DATA = [
     title:"도착 & 아메리칸 빌리지",
     subtitle:"비치프론트 타워 미하마 · 숙소 주차장 이용, 이후 전부 도보",
     items:[
-      {time:"12:00",place:"나하 공항 도착",note:"입국 심사 · 수하물 수령 약 30분",tag:"",parking:"",hl:false},
-      {time:"12:30",place:"렌터카 픽업",note:"셔틀 → 영업소 → 서류 · 보험 · 차량 확인 (약 45분)",tag:"",parking:"",hl:false},
-      {time:"13:15",place:"출발, 국도 58번 북상",note:"차탄까지 약 40분",tag:"",parking:"",hl:false},
-      {time:"14:00",place:"숙소 체크인",note:"비치프론트 타워 미하마. 차는 숙소 주차장에.",tag:"",parking:"숙소 전용 주차장",hl:false},
-      {time:"14:20",place:"점심 식사",note:"아메리칸 빌리지 내. 타코라이스 · A&W · 스테이크",tag:"food",parking:"",hl:true},
-      {time:"15:15",place:"아라하 비치",note:"숙소 바로 앞! 해변 산책 · 소화 타임",tag:"beach",parking:"",hl:false},
-      {time:"17:00",place:"선셋 비치",note:"도보 15분. 일몰 타이밍에 맞춰 이동",tag:"view",parking:"",hl:true},
-      {time:"18:00",place:"🌅 일몰 감상",note:"하늘이 오렌지색으로 물드는 순간",tag:"",parking:"",hl:false},
-      {time:"18:30",place:"아메리칸 빌리지",note:"디포 아일랜드 쇼핑몰 · 해안 보드워크 야경",tag:"shop",parking:"",hl:false},
-      {time:"19:30",place:"저녁 식사",note:"빌리지 내 식당에서",tag:"food",parking:"",hl:true},
-      {time:"20:30",place:"블루씰 아이스크림",note:"베니이모(자색고구마) 맛 필수! 포토존도",tag:"food",parking:"",hl:false},
-      {time:"21:00",place:"아라하 비치 야간 산책",note:"숙소 앞 밤바다. 파도 소리 들으며",tag:"",parking:"",hl:false},
-      {time:"21:30",place:"바에서 마무리",note:"Earth Village Izakaya / Barragan / AMF (도보)",tag:"",parking:"",hl:true}
+      {time:"12:05",place:"나하 공항 도착",note:"진에어 LJ341 도착. 입국 심사 · 수하물 수령 약 30분",tag:"",parking:"",hl:false,addr:"那覇空港"},
+      {time:"12:35",place:"렌터카 픽업",note:"셔틀 → 영업소 → 서류 · 보험 · 차량 확인 (약 45분)",tag:"",parking:"",hl:false,addr:""},
+      {time:"13:20",place:"출발, 국도 58번 북상",note:"차탄까지 약 40분",tag:"",parking:"",hl:false,addr:""},
+      {time:"14:00",place:"숙소 체크인",note:"비치프론트 타워 미하마. 차는 숙소 주차장에.",tag:"",parking:"숙소 전용 주차장",hl:false,addr:"Beach Front Tower Mihama"},
+      {time:"14:20",place:"점심 식사",note:"아메리칸 빌리지 내. 타코라이스 · A&W · 스테이크",tag:"food",parking:"",hl:true,addr:"American Village Chatan"},
+      {time:"15:15",place:"아라하 비치",note:"숙소 바로 앞! 해변 산책 · 소화 타임",tag:"beach",parking:"",hl:false,addr:"Araha Beach"},
+      {time:"17:00",place:"선셋 비치",note:"도보 15분. 일몰 타이밍에 맞춰 이동",tag:"view",parking:"",hl:true,addr:"Chatan Park Sunset Beach"},
+      {time:"18:00",place:"🌅 일몰 감상",note:"하늘이 오렌지색으로 물드는 순간",tag:"",parking:"",hl:false,addr:""},
+      {time:"18:30",place:"아메리칸 빌리지",note:"디포 아일랜드 쇼핑몰 · 해안 보드워크 야경",tag:"shop",parking:"",hl:false,addr:"American Village Chatan"},
+      {time:"19:30",place:"저녁 식사",note:"빌리지 내 식당에서",tag:"food",parking:"",hl:true,addr:""},
+      {time:"20:30",place:"블루씰 아이스크림",note:"베니이모(자색고구마) 맛 필수! 포토존도",tag:"food",parking:"",hl:false,addr:"Blue Seal Chatan"},
+      {time:"21:00",place:"아라하 비치 야간 산책",note:"숙소 앞 밤바다. 파도 소리 들으며",tag:"",parking:"",hl:false,addr:"Araha Beach"},
+      {time:"21:30",place:"바에서 마무리",note:"Earth Village Izakaya / Barragan / AMF (도보)",tag:"",parking:"",hl:true,addr:"Earth Village Izakaya Chatan"}
     ]
   },
   {
     title:"북부 원정 드라이브",
     subtitle:"비치프론트 타워 미하마 (연박) · 하루 종일 렌터카 이동",
     items:[
-      {time:"07:30",place:"기상 & 아침",note:"호텔 조식 or 편의점 오니기리",tag:"",parking:"",hl:false},
-      {time:"08:00",place:"출발, 북쪽으로!",note:"",tag:"",parking:"",hl:false},
-      {time:"08:40",place:"만좌모",note:"입장 100엔. 코끼리 바위 + 절벽 산책 (20~30분)",tag:"view",parking:"전용 주차장, 무료",hl:true},
-      {time:"10:20",place:"츄라우미 수족관",note:"입장 2,180엔. 고래상어 · 돌고래 쇼(무료) · 터치풀 (약 2시간)",tag:"view",parking:"북게이트 P7 입체주차장, 무료, 1000대+",hl:true},
-      {time:"12:30",place:"비세 후쿠기 가로수길",note:"수족관에서 도보 5분. 초록 터널 산책 + 카페 점심",tag:"food",parking:"주변 민가 유료 주차장 300~500엔",hl:true},
-      {time:"14:00",place:"코우리 대교 & 코우리섬",note:"에메랄드빛 바다 위 2km 다리! 전망 포인트 사진 필수",tag:"view",parking:"",hl:true},
-      {time:"14:10",place:"코우리 오션 타워",note:"입장 1,000엔. 자동 카트 · 조개 박물관 · 360도 전망",tag:"",parking:"전용 주차장, 무료 (좁으니 일찍)",hl:false},
-      {time:"15:10",place:"코우리섬 한 바퀴",note:"드라이브 15분 + 하트 록 비치 + 카페 음료",tag:"beach",parking:"",hl:false},
-      {time:"16:10",place:"세소코 비치",note:"투명한 바다에 발 담그며 휴식",tag:"beach",parking:"전용 주차장 1,000엔 (1일)",hl:false},
-      {time:"17:00",place:"복귀 시작",note:"차탄까지 약 1시간 20분",tag:"",parking:"",hl:false},
-      {time:"18:20",place:"숙소 도착",note:"샤워 · 휴식",tag:"",parking:"",hl:false},
-      {time:"19:30",place:"저녁 식사",note:"차탄 주변, 어제와 다른 장르로",tag:"food",parking:"",hl:true},
-      {time:"20:30",place:"아라하 비치 야간 산책 & 바",note:"여유 있으면 도보로 빌리지 쪽 바",tag:"",parking:"",hl:false}
+      {time:"07:30",place:"기상 & 아침",note:"호텔 조식 or 편의점 오니기리",tag:"",parking:"",hl:false,addr:""},
+      {time:"08:00",place:"출발, 북쪽으로!",note:"",tag:"",parking:"",hl:false,addr:""},
+      {time:"08:40",place:"만좌모",note:"입장 100엔. 코끼리 바위 + 절벽 산책 (20~30분)",tag:"view",parking:"전용 주차장, 무료",hl:true,addr:"万座毛"},
+      {time:"10:20",place:"츄라우미 수족관",note:"입장 2,180엔. 고래상어 · 돌고래 쇼(무료) · 터치풀 (약 2시간)",tag:"view",parking:"북게이트 P7 입체주차장, 무료, 1000대+",hl:true,addr:"沖縄美ら海水族館 北ゲート"},
+      {time:"12:30",place:"비세 후쿠기 가로수길",note:"수족관에서 도보 5분. 초록 터널 산책 + 카페 점심",tag:"food",parking:"주변 민가 유료 주차장 300~500엔",hl:true,addr:"備瀬のフクギ並木"},
+      {time:"14:00",place:"코우리 대교 & 코우리섬",note:"에메랄드빛 바다 위 2km 다리! 전망 포인트 사진 필수",tag:"view",parking:"",hl:true,addr:"古宇利大橋"},
+      {time:"14:10",place:"코우리 오션 타워",note:"입장 1,000엔. 자동 카트 · 조개 박물관 · 360도 전망",tag:"",parking:"전용 주차장, 무료 (좁으니 일찍)",hl:false,addr:"古宇利オーシャンタワー"},
+      {time:"15:10",place:"코우리섬 한 바퀴",note:"드라이브 15분 + 하트 록 비치 + 카페 음료",tag:"beach",parking:"",hl:false,addr:"ハートロック 古宇利島"},
+      {time:"16:10",place:"세소코 비치",note:"투명한 바다에 발 담그며 휴식",tag:"beach",parking:"전용 주차장 1,000엔 (1일)",hl:false,addr:"瀬底ビーチ"},
+      {time:"17:00",place:"복귀 시작",note:"차탄까지 약 1시간 20분",tag:"",parking:"",hl:false,addr:""},
+      {time:"18:20",place:"숙소 도착",note:"샤워 · 휴식",tag:"",parking:"",hl:false,addr:"Beach Front Tower Mihama"},
+      {time:"19:30",place:"저녁 식사",note:"차탄 주변, 어제와 다른 장르로",tag:"food",parking:"",hl:true,addr:""},
+      {time:"20:30",place:"아라하 비치 야간 산책 & 바",note:"여유 있으면 도보로 빌리지 쪽 바",tag:"",parking:"",hl:false,addr:"Araha Beach"}
     ]
   },
   {
     title:"아울렛 → 나하 쇼핑 데이",
     subtitle:"나하 시내 숙소 · 아시비나 & 슈리성까지 차 → 숙소 주차 후 도보",
     items:[
-      {time:"10:00",place:"체크아웃 → 아시비나 출발",note:"차탄에서 약 30분 남하",tag:"",parking:"",hl:false},
-      {time:"10:30",place:"아시비나 아울렛몰",note:"BEAMS 아울렛 등 셀렉트샵 쇼핑 (1시간)",tag:"shop",parking:"대형 무료 주차장",hl:true},
-      {time:"11:30",place:"슈리성으로 이동",note:"아시비나에서 약 25분",tag:"",parking:"",hl:false},
-      {time:"12:00",place:"슈리성",note:"성곽 산책 무료 / 유료 400엔. 나하 시내 전망 (1시간)",tag:"view",parking:"현영 주차장 P1/P2, 320엔",hl:true},
-      {time:"13:00",place:"나하 숙소 체크인",note:"짐 내리고 차 주차. 여기서부터 전부 도보!",tag:"",parking:"숙소 주차장 or 코인파킹 (12h 최대 700~1,000엔)",hl:false},
-      {time:"13:30",place:"나미노우에 신사",note:"절벽 위 신사 + 아래 작은 해변 (30분)",tag:"view",parking:"",hl:false},
-      {time:"14:00",place:"마키시 공설시장 점심",note:"1층 해산물 골라서 2층에서 조리! 조리비 1인 500엔",tag:"food",parking:"",hl:true},
-      {time:"15:00",place:"츠보야 도자기 거리",note:"마키시에서 도보 5분. 시사 기념품 · 도자기 가게",tag:"shop",parking:"",hl:false},
-      {time:"15:30",place:"코쿠사이도리 & 우키시마도리",note:"기념품 · BEAMS + 아메카지 고착야 (FISH BOWL · si8 · CYCLONE · PORTA&GATE)",tag:"shop",parking:"",hl:true},
-      {time:"18:00",place:"마지막 밤 저녁",note:"아구 돼지 샤브샤브 / 이자카야+아와모리 / 스테이크",tag:"food",parking:"",hl:true},
-      {time:"19:30",place:"코쿠사이도리 야경 산책 + 돈키호테",note:"24시간 영업! 로이스 초콜릿 · 시로이 코이비토 · 자가비 · 키캣 한정 · 약·화장품 · 오키나와 굿즈. 면세 5,500엔 이상 시 여권 챙겨 면세 카운터로!",tag:"shop",parking:"",hl:true},
-      {time:"20:30",place:"숙소 복귀, 짐 정리",note:"",tag:"",parking:"",hl:false}
+      {time:"10:00",place:"체크아웃 → 아시비나 출발",note:"차탄에서 약 30분 남하",tag:"",parking:"",hl:false,addr:""},
+      {time:"10:30",place:"아시비나 아울렛몰",note:"BEAMS 아울렛 등 셀렉트샵 쇼핑 (1시간)",tag:"shop",parking:"대형 무료 주차장",hl:true,addr:"沖縄アウトレットモール あしびなー"},
+      {time:"11:30",place:"슈리성으로 이동",note:"아시비나에서 약 25분",tag:"",parking:"",hl:false,addr:""},
+      {time:"12:00",place:"슈리성",note:"성곽 산책 무료 / 유료 400엔. 나하 시내 전망 (1시간)",tag:"view",parking:"현영 주차장 P1/P2, 320엔",hl:true,addr:"首里城公園 駐車場"},
+      {time:"13:00",place:"나하 숙소 체크인",note:"짐 내리고 차 주차. 여기서부터 전부 도보!",tag:"",parking:"숙소 주차장 or 코인파킹 (12h 최대 700~1,000엔)",hl:false,addr:""},
+      {time:"13:30",place:"나미노우에 신사",note:"절벽 위 신사 + 아래 작은 해변 (30분)",tag:"view",parking:"",hl:false,addr:"波上宮"},
+      {time:"14:00",place:"마키시 공설시장 점심",note:"1층 해산물 골라서 2층에서 조리! 조리비 1인 500엔",tag:"food",parking:"",hl:true,addr:"第一牧志公設市場"},
+      {time:"15:00",place:"츠보야 도자기 거리",note:"마키시에서 도보 5분. 시사 기념품 · 도자기 가게",tag:"shop",parking:"",hl:false,addr:"壺屋やちむん通り"},
+      {time:"15:30",place:"코쿠사이도리 & 우키시마도리",note:"기념품 · BEAMS + 아메카지 고착야 (FISH BOWL · si8 · CYCLONE · PORTA&GATE)",tag:"shop",parking:"",hl:true,addr:"国際通り 那覇"},
+      {time:"18:00",place:"마지막 밤 저녁",note:"아구 돼지 샤브샤브 / 이자카야+아와모리 / 스테이크",tag:"food",parking:"",hl:true,addr:""},
+      {time:"19:30",place:"코쿠사이도리 야경 산책 + 돈키호테",note:"24시간 영업! 로이스 초콜릿 · 시로이 코이비토 · 자가비 · 키캣 한정 · 약·화장품 · 오키나와 굿즈. 면세 5,500엔 이상 시 여권 챙겨 면세 카운터로!",tag:"shop",parking:"",hl:true,addr:"ドン・キホーテ 国際通り店"},
+      {time:"20:30",place:"숙소 복귀, 짐 정리",note:"",tag:"",parking:"",hl:false,addr:""}
     ]
   },
   {
     title:"아침 & 귀국",
-    subtitle:"렌터카 반납 → 공항",
+    subtitle:"렌터카 반납 → 공항 (LJ342 13:15 출발)",
     items:[
-      {time:"07:30",place:"기상, 체크아웃",note:"",tag:"",parking:"",hl:false},
-      {time:"08:00",place:"렌터카 반납",note:"영업소 검수 → 셔틀로 공항 이동",tag:"",parking:"",hl:false},
-      {time:"09:00",place:"포크타마고 오니기리",note:"공항 1층 도착 로비. 줄 길 수 있으니 여유 있게",tag:"food",parking:"",hl:true},
-      {time:"09:30",place:"체크인 & 공항 기념품점",note:"자탄연 과자 · 홍임타르트 마지막 쇼핑",tag:"shop",parking:"",hl:false},
-      {time:"~12:00",place:"출발 ✈️",note:"다음에 또 오자!",tag:"",parking:"",hl:false}
+      {time:"08:00",place:"기상, 호텔 조식",note:"여유롭게 아침! 마지막 오키나와 바다 뷰",tag:"",parking:"",hl:false,addr:""},
+      {time:"09:30",place:"체크아웃",note:"짐 정리 · 마지막 객실 점검",tag:"",parking:"",hl:false,addr:""},
+      {time:"09:45",place:"렌터카 영업소 출발",note:"공항 인근 렌터카 영업소까지 약 30분",tag:"",parking:"",hl:false,addr:""},
+      {time:"10:15",place:"렌터카 반납",note:"영업소 검수 → 셔틀로 공항 이동 (15~20분)",tag:"",parking:"",hl:false,addr:""},
+      {time:"10:45",place:"나하 공항 도착",note:"국제선 출발 2시간 30분 전. 여유 있게!",tag:"",parking:"",hl:false,addr:"那覇空港"},
+      {time:"11:00",place:"포크타마고 오니기리",note:"공항 1층 도착 로비. 줄 길 수 있으니 일찍!",tag:"food",parking:"",hl:true,addr:"ポーたま 那覇空港店"},
+      {time:"11:30",place:"체크인 & 공항 기념품점",note:"자탄연 과자 · 홍임타르트 마지막 쇼핑",tag:"shop",parking:"",hl:false,addr:"那覇空港"},
+      {time:"12:30",place:"게이트 이동",note:"보안 검사 · 면세 구역",tag:"",parking:"",hl:false,addr:""},
+      {time:"13:15",place:"출발 ✈️ LJ342",note:"15:30 인천 도착. 다음에 또 오자!",tag:"",parking:"",hl:false,addr:""}
     ]
   }
 ];
+
+const PHRASES = [
+  {ko:"안녕하세요",jp:"こんにちは",ro:"콘니치와"},
+  {ko:"감사합니다",jp:"ありがとうございます",ro:"아리가토 고자이마스"},
+  {ko:"죄송합니다 / 저기요",jp:"すみません",ro:"스미마셍"},
+  {ko:"이거 주세요",jp:"これください",ro:"코레 쿠다사이"},
+  {ko:"얼마예요?",jp:"いくらですか",ro:"이쿠라데스카"},
+  {ko:"계산해 주세요",jp:"お会計お願いします",ro:"오카이케이 오네가이시마스"},
+  {ko:"카드 되나요?",jp:"カード使えますか",ro:"카-도 츠카에마스카"},
+  {ko:"영수증 주세요",jp:"レシートください",ro:"레시-토 쿠다사이"},
+  {ko:"화장실 어디예요?",jp:"トイレはどこですか",ro:"토이레와 도코데스카"},
+  {ko:"한국어/영어 메뉴 있나요?",jp:"韓国語/英語のメニューありますか",ro:"칸코쿠고/에이고노 메뉴 아리마스카"},
+  {ko:"이거 매워요?",jp:"これ辛いですか",ro:"코레 카라이데스카"},
+  {ko:"추천해 주세요",jp:"おすすめは何ですか",ro:"오스스메와 난데스카"},
+  {ko:"면세 되나요?",jp:"免税できますか",ro:"멘제이 데키마스카"},
+  {ko:"사진 찍어 주세요",jp:"写真撮ってください",ro:"샤신 톳테 쿠다사이"},
+  {ko:"여기에서 가까운가요?",jp:"ここから近いですか",ro:"코코카라 치카이데스카"},
+  {ko:"도와주세요",jp:"助けてください",ro:"타스케테 쿠다사이"},
+  {ko:"맛있어요!",jp:"美味しいです",ro:"오이시이데스"},
+  {ko:"잘 먹었습니다",jp:"ごちそうさまでした",ro:"고치소사마데시타"}
+];
+
+const PACKING = {
+  "필수 서류":[
+    "여권 (유효기간 6개월 이상)",
+    "국제운전면허증",
+    "항공권 (e-티켓)",
+    "호텔 바우처",
+    "렌터카 예약 바우처",
+    "츄라우미 수족관 예약 확인"
+  ],
+  "결제 / 통신":[
+    "신용카드 (해외결제 활성화 확인)",
+    "현금 / 엔화 환전 (5만엔 이상)",
+    "유심 또는 포켓 와이파이",
+    "데이터 로밍 설정"
+  ],
+  "전자기기":[
+    "휴대폰 충전기",
+    "보조배터리 (기내 반입)",
+    "110V 어댑터 (돼지코)",
+    "카메라 / 셀카봉"
+  ],
+  "의류":[
+    "겉옷 (일교차 대비)",
+    "수영복",
+    "갈아입을 옷 4일치",
+    "속옷 / 양말",
+    "잠옷",
+    "편한 신발 (많이 걸음!)",
+    "슬리퍼"
+  ],
+  "위생 / 세면":[
+    "세면도구 (호텔 어메니티 확인)",
+    "선크림",
+    "기초 화장품",
+    "여성용품"
+  ],
+  "비상약 / 기타":[
+    "감기약 / 진통제 / 소화제",
+    "밴드 / 멀미약",
+    "모자 / 선글라스",
+    "우산 / 우비",
+    "보조가방 (쇼핑용)",
+    "지퍼백 / 비닐봉지"
+  ]
+};
 
 let data = [];
 let editMode = false;
@@ -311,12 +407,17 @@ function render() {
       if (item.tag && tagMap[item.tag]) tagHtml = `<span class="tl-tag ${tagMap[item.tag][0]}">${tagMap[item.tag][1]}</span>`;
       let parkHtml = '';
       if (item.parking) parkHtml = `<div class="parking"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="parking" data-di="${di}" data-ii="${ii}">${esc(item.parking)}</span></div>`;
+      let mapBtn = '';
+      if (item.addr) {
+        const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.addr)}`;
+        mapBtn = `<a class="btn-copy" href="${url}" target="_blank" rel="noopener" onclick="copyAlso('${esc(item.addr).replace(/'/g,"\\'")}')">지도 열기</a>`;
+      }
 
       el.innerHTML = `
         <button class="btn-del" onclick="delItem(${di},${ii})" title="삭제">✕</button>
         <span class="tl-time ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="time" data-di="${di}" data-ii="${ii}">${esc(item.time)}</span>
         <div class="tl-content">
-          <div class="tl-place ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="place" data-di="${di}" data-ii="${ii}">${esc(item.place)}</div>
+          <div class="tl-place"><span class="${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="place" data-di="${di}" data-ii="${ii}">${esc(item.place)}</span>${mapBtn}</div>
           <div class="tl-note ${editMode?'editable':''}" ${editMode?'contenteditable="true"':''} data-field="note" data-di="${di}" data-ii="${ii}">${esc(item.note)}</div>
           ${tagHtml}${parkHtml}
         </div>
@@ -334,20 +435,23 @@ function render() {
 
 function esc(s) { const d=document.createElement('div');d.textContent=s;return d.innerHTML; }
 
+function copyAlso(addr) {
+  if (navigator.clipboard) navigator.clipboard.writeText(addr).catch(()=>{});
+}
+
 function onEdit(e) {
   const el = e.target;
   const di = parseInt(el.dataset.di);
   const ii = el.dataset.ii !== undefined ? parseInt(el.dataset.ii) : null;
   const field = el.dataset.field;
   const val = el.textContent.trim();
-
   if (ii !== null) { data[di].items[ii][field] = val; }
   else { data[di][field] = val; }
   saveLocal();
 }
 
 function addItem(di) {
-  data[di].items.push({time:"00:00",place:"새 일정",note:"메모를 입력하세요",tag:"",parking:"",hl:false});
+  data[di].items.push({time:"00:00",place:"새 일정",note:"메모를 입력하세요",tag:"",parking:"",hl:false,addr:""});
   saveLocal(); render();
 }
 
@@ -385,6 +489,101 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+/* D-DAY */
+function renderDday() {
+  let date = localStorage.getItem('okinawa_date');
+  if (!date) {
+    date = '2026-04-10';
+    localStorage.setItem('okinawa_date', date);
+  }
+  const ddayEl = document.getElementById('dday');
+  const labelEl = document.getElementById('ddayLabel');
+  const target = new Date(date + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const diff = Math.floor((target - today) / (1000*60*60*24));
+  if (diff > 0) {
+    ddayEl.textContent = `D-${diff}`;
+    labelEl.textContent = `${date} 출발까지`;
+  } else if (diff === 0) {
+    ddayEl.textContent = 'D-DAY';
+    labelEl.textContent = '오늘 출발! ✈️';
+  } else if (diff >= -3) {
+    ddayEl.textContent = `여행 ${-diff+1}일차`;
+    labelEl.textContent = '오키나와에서! 🌊';
+  } else {
+    ddayEl.textContent = `다녀온 지 ${-diff-3}일`;
+    labelEl.textContent = '추억이 되었네 🐚';
+  }
+}
+
+function setTripDate() {
+  const current = localStorage.getItem('okinawa_date') || '';
+  const input = prompt('출발일을 입력하세요 (YYYY-MM-DD)', current || '2026-04-10');
+  if (input && /^\d{4}-\d{2}-\d{2}$/.test(input)) {
+    localStorage.setItem('okinawa_date', input);
+    renderDday();
+    showToast('출발일 저장 완료!');
+  }
+}
+
+/* MODAL */
+function openModal(type) {
+  const overlay = document.getElementById('modalOverlay');
+  const title = document.getElementById('modalTitle');
+  const body = document.getElementById('modalBody');
+
+  if (type === 'jp') {
+    title.textContent = '🇯🇵 일본어 회화 시트';
+    body.innerHTML = PHRASES.map(p => `
+      <div class="phrase">
+        <div class="phrase-ko">${esc(p.ko)}</div>
+        <div class="phrase-jp">${esc(p.jp)}</div>
+        <div class="phrase-romaji">${esc(p.ro)}</div>
+      </div>
+    `).join('');
+  } else if (type === 'pack') {
+    title.textContent = '✓ 출국 준비물';
+    const checked = JSON.parse(localStorage.getItem('okinawa_pack') || '{}');
+    let total = 0, done = 0;
+    let html = '<div class="pack-progress" id="packProg"></div>';
+    Object.entries(PACKING).forEach(([cat, items]) => {
+      html += `<div class="pack-cat">${esc(cat)}</div>`;
+      items.forEach(item => {
+        total++;
+        const isDone = checked[item];
+        if (isDone) done++;
+        html += `<div class="pack-item ${isDone?'done':''}" onclick="togglePack('${esc(item).replace(/'/g,"\\'")}')">
+          <div class="pack-check"></div>
+          <div class="pack-label">${esc(item)}</div>
+        </div>`;
+      });
+    });
+    body.innerHTML = html;
+    document.getElementById('packProg').textContent = `${done} / ${total} 준비 완료 (${Math.round(done/total*100)}%)`;
+  }
+
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closeModalBg(e) {
+  if (e.target.id === 'modalOverlay') closeModal();
+}
+
+function togglePack(item) {
+  const checked = JSON.parse(localStorage.getItem('okinawa_pack') || '{}');
+  if (checked[item]) delete checked[item];
+  else checked[item] = true;
+  localStorage.setItem('okinawa_pack', JSON.stringify(checked));
+  openModal('pack');
+}
+
 function initScrollAnim() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'} });
@@ -404,6 +603,7 @@ function initScrollAnim() {
 
 loadData();
 render();
+renderDday();
 </script>
 </body>
 </html>
